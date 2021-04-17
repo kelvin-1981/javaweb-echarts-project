@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="asserts/js/echarts.min.js"></script>
+    <script src="asserts/js/jquery-1.5.1.min.js"></script>
+</head>
+<body>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<script language="JavaScript">
+
+    const dom = document.getElementById("main");
+
+    fetch('asserts/css/mydark.project.json')
+        .then((res) => res.json())
+        .then(data => {
+            echarts.registerTheme('myDark',data);
+            draw();
+        });
+
+    function draw(){
+        const myChart = echarts.init(dom,'myDark');
+        const option = {
+            series: [
+                {
+                    type:'pie',
+                    data:[
+                        {value:80,name:'html'},
+                        {value:10,name:'css'},
+                        {value:30,name:'js'},
+                        {value:40,name:'vue'},
+                        {value:40,name:'canvas'},
+                    ],
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+</script>
+
+</body>
+</html>
